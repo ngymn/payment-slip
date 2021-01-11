@@ -1,0 +1,12 @@
+version: '3'
+services:
+  react:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+     - ./:/usr/src/app
+    command: sh -c "cd payment-slip-react && yarn start"
+    ports:
+     - "3000:3000"
+    tty: true
