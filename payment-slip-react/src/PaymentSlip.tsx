@@ -23,8 +23,8 @@ interface PaymentSlipProps {
 }
 
 export const PaymentSlip: React.FC<PaymentSlipProps> = ({ no, date, code, payee, items }) => {
-   
-    const totalAmount = items?.reduce((p,c) => p + c.amount , 0) || 0
+
+    const totalAmount = items?.reduce((p, c) => p + c.amount, 0) || 0
 
     return <React.Fragment>
         <div className="payment-slip">
@@ -38,7 +38,7 @@ export const PaymentSlip: React.FC<PaymentSlipProps> = ({ no, date, code, payee,
                         </div>
 
                         <div className="date">
-                            <Date {...date}/>
+                            <Date {...date} />
                         </div>
                     </div>
                     <div className="head-right">
@@ -60,15 +60,19 @@ export const PaymentSlip: React.FC<PaymentSlipProps> = ({ no, date, code, payee,
 
                 <div className="table">
                     <table className="table">
-                        <thead className="th">
-                            <th><span>勘定科目</span></th>
-                            <th><span>摘要</span></th>
-                            <th><span>金額</span></th>
+                        <thead >
+                            <tr className="th">
+                                <th><span>勘定科目</span></th>
+                                <th><span>摘要</span></th>
+                                <th><span>金額</span></th>
+                            </tr>
                         </thead>
-                        {items?.map(item => <Item {...item} />)}
-                        <tbody className="summary">
-                            <td colSpan={2}><span>合計</span></td>
-                            <td><span>{doFormatCurrency(totalAmount)}</span></td>
+                        <tbody>
+                            {items?.map((item, i) => <Item key={`item-${i}`} {...item} />)}
+                            <tr className="summary">
+                                <td colSpan={2}><span>合計</span></td>
+                                <td><span>{doFormatCurrency(totalAmount)}</span></td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -96,18 +100,18 @@ const Date: React.FC<DateProps> = ({ y, m, d }) =>
         <span>{d}</span><span>日</span>
     </React.Fragment>
 
-const No: React.FC<{no?: string}> = ({ no }) =>
+const No: React.FC<{ no?: string }> = ({ no }) =>
     <React.Fragment>
         <span>No.</span><span>{no}</span>
     </React.Fragment>
 
-const Code: React.FC<{code?: string}> = ({ code }) =>
+const Code: React.FC<{ code?: string }> = ({ code }) =>
     <React.Fragment>
         <div className="tategaki centering"><span>コード</span></div>
         <div className="code centering"><span>{code}</span></div>
     </React.Fragment>
 
-const Payee: React.FC<{payee?: string}> = ({ payee }) =>
+const Payee: React.FC<{ payee?: string }> = ({ payee }) =>
     <React.Fragment>
         <div className="tategaki centering">
             <span>支払先</span>
@@ -120,11 +124,11 @@ const Payee: React.FC<{payee?: string}> = ({ payee }) =>
 
 const Item: React.FC<PaymentItemProps> = ({ name, remark, amount }) =>
     <React.Fragment>
-        <tbody className="td">
+        <tr className="td">
             <td><span>{name}</span></td>
             <td><span>{remark}</span></td>
             <td><span>{doFormatCurrency(amount)}</span></td>
-        </tbody>
+        </tr>
     </React.Fragment>
 
 const doFormatCurrency = (amount: number) => `¥${amount.toLocaleString()}-`
