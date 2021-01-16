@@ -2,12 +2,31 @@
 import React from "react";
 import './App.css';
 
-interface PaymentSlipProps {
-
+interface PaymentItemProps {
+    name: string
+    remark: string
+    amount: number
 }
 
-export const PaymentSlip: React.FC<PaymentSlipProps> = ({ children }) => (
-    <React.Fragment>
+interface DateProps {
+    y?: number
+    m?: number
+    d?: number
+}
+
+interface PaymentSlipProps {
+    no?: string
+    date?: DateProps
+    code?: string
+    payee?: string
+    items?: PaymentItemProps[]
+}
+
+export const PaymentSlip: React.FC<PaymentSlipProps> = ({ no, date, code, payee, items }) => {
+   
+    const totalAmount = items?.reduce((p,c) => p + c.amount, 0) || 0
+
+    return <React.Fragment>
         <div className="payment-slip">
             <div className="container">
 
@@ -15,11 +34,11 @@ export const PaymentSlip: React.FC<PaymentSlipProps> = ({ children }) => (
                     <div className="head-left">
                         <div>
                             <span className="title">出金伝票</span>
-                            <No number="100"></No>
+                            <No no={no}></No>
                         </div>
 
                         <div className="date">
-                            <Date y={2000} m={12} d={31} />
+                            <Date {...date}/>
                         </div>
                     </div>
                     <div className="head-right">
@@ -35,8 +54,8 @@ export const PaymentSlip: React.FC<PaymentSlipProps> = ({ children }) => (
                 <hr />
 
                 <div className="middle-item-wrapper middle-item ">
-                    <Code code="ABC123" />
-                    <Payee payee="株式会社あいうえお" />
+                    <Code code={code} />
+                    <Payee payee={payee} />
                 </div>
 
                 <div className="table">
@@ -46,13 +65,10 @@ export const PaymentSlip: React.FC<PaymentSlipProps> = ({ children }) => (
                             <th><span>摘要</span></th>
                             <th><span>金額</span></th>
                         </thead>
-                        <Item name="旅費交通費" remark="東京-大阪" amount={1000000} />
-                        <Item name="旅費交通費" remark="東京-大阪" amount={1000000} />
-                        <Item name="旅費交通費" remark="東京-大阪" amount={1000000} />
-                        <Item name="旅費交通費" remark="東京-大阪" amount={1000000} />
+                        {items?.map(item => <Item {...item} />)}
                         <tbody className="summary">
                             <td colSpan={2}><span>合計</span></td>
-                            <td><span>{doFormatCurrency(1000000)}</span></td>
+                            <td><span>{doFormatCurrency(totalAmount)}</span></td>
                         </tbody>
                     </table>
                 </div>
@@ -60,8 +76,7 @@ export const PaymentSlip: React.FC<PaymentSlipProps> = ({ children }) => (
         </div>
 
     </React.Fragment>
-
-);
+};
 
 interface ApprovingBoxProps {
     title?: string
@@ -74,12 +89,6 @@ const ApprovingBox: React.FC<ApprovingBoxProps> = ({ title }) =>
         </div>
     </React.Fragment>
 
-
-interface DateProps {
-    y: number
-    m: number
-    d: number
-}
 const Date: React.FC<DateProps> = ({ y, m, d }) =>
     <React.Fragment>
         <span>{y}</span><span>年</span>
@@ -87,29 +96,18 @@ const Date: React.FC<DateProps> = ({ y, m, d }) =>
         <span>{d}</span><span>日</span>
     </React.Fragment>
 
-
-interface NoProps {
-    number: string
-}
-const No: React.FC<NoProps> = ({ number }) =>
+const No: React.FC<{no?: string}> = ({ no }) =>
     <React.Fragment>
-        <span>No.</span><span>{number}</span>
+        <span>No.</span><span>{no}</span>
     </React.Fragment>
 
-
-interface CodeProps {
-    code?: string
-}
-const Code: React.FC<CodeProps> = ({ code }) =>
+const Code: React.FC<{code?: string}> = ({ code }) =>
     <React.Fragment>
         <div className="tategaki centering"><span>コード</span></div>
         <div className="code centering"><span>{code}</span></div>
     </React.Fragment>
 
-interface PayeeProps {
-    payee: string
-}
-const Payee: React.FC<PayeeProps> = ({ payee }) =>
+const Payee: React.FC<{payee?: string}> = ({ payee }) =>
     <React.Fragment>
         <div className="tategaki centering">
             <span>支払先</span>
@@ -120,13 +118,7 @@ const Payee: React.FC<PayeeProps> = ({ payee }) =>
         </div>
     </React.Fragment>
 
-
-interface ItemProps {
-    name: string
-    remark: string
-    amount: number
-}
-const Item: React.FC<ItemProps> = ({ name, remark, amount }) =>
+const Item: React.FC<PaymentItemProps> = ({ name, remark, amount }) =>
     <React.Fragment>
         <tbody className="td">
             <td><span>{name}</span></td>
