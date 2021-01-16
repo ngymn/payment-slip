@@ -39,6 +39,26 @@
 
 /* --- ここから --- */
 
+@media print{
+  #input-area{
+    display: none;
+  }
+}
+
+#input-area {
+  margin: 1mm;
+  padding: 1mm;
+  color:cornflowerblue;
+  border: solid 1mm;
+}
+
+#input-area > dl,dt {
+  margin-top: 1mm;
+  margin-bottom: 1mm;
+  font-size: larger;
+  font-weight: bolder;
+}
+
 .payment-slip {
   width: 128mm;
   height: 91mm;

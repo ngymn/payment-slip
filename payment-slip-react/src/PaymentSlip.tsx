@@ -8,10 +8,10 @@ interface PaymentItemProps {
     amount: number
 }
 
-interface DateProps {
-    y?: number
-    m?: number
-    d?: number
+export interface DateProps {
+    y?: string
+    m?: string
+    d?: string
 }
 
 interface PaymentSlipProps {
@@ -24,7 +24,7 @@ interface PaymentSlipProps {
 
 export const PaymentSlip: React.FC<PaymentSlipProps> = ({ no, date, code, payee, items }) => {
    
-    const totalAmount = items?.reduce((p,c) => p + c.amount, 0) || 0
+    const totalAmount = items?.reduce((p,c) => p + c.amount , 0) || 0
 
     return <React.Fragment>
         <div className="payment-slip">
