@@ -36,3 +36,184 @@
     transform: rotate(360deg);
   }
 }
+
+/* --- ここから --- */
+
+.payment-slip {
+  width: 128mm;
+  height: 91mm;
+  color: darkcyan;
+  margin: 1mm;
+  padding: 1mm;
+  border: solid 1mm;
+  border-color: darkcyan;
+}
+
+.container {
+  margin-top: 2mm;
+  margin-left: 10mm;
+  margin-right: 1mm;
+  margin-bottom: 2mm;
+}
+
+.head {
+  height: 15mm;
+}
+
+.head-left {
+  float: left;
+  width: 40%;
+  height: 100%;
+}
+
+.head-right {
+  float: right;
+  width: 60%;
+  height: 100%;
+}
+
+.approving-boxes > div {
+  float: right;
+  margin-left: 1mm;
+}
+
+.approving-box-outer {
+  width: 14mm;
+  height: 15mm;
+  border: solid 0.1mm;
+}
+
+.approving-box-title {
+  width: 100%;
+  height: 3.5mm;
+  border-bottom: solid 0.1mm;
+  font-size: xx-small;
+  text-align: center;
+}
+
+.title {
+  font-size: larger;
+  font-weight: bolder;
+  margin-right: 2mm;
+}
+
+.date {
+  font-size: small;
+  margin-top: 3mm;
+  text-align: left;
+}
+
+.centering {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.middle-item-wrapper {
+  width: 100%;
+  height: 10mm;
+  border: solid 0.1mm;
+  box-sizing: border-box;
+  margin-bottom: 1mm;
+}
+
+.middle-item > div {
+  float: left;
+}
+
+.tategaki {
+  writing-mode: vertical-rl;
+  font-size: xx-small;
+  border: solid 0.1mm;
+  box-sizing: border-box;
+  width: 5%;
+  height: 100%;
+}
+
+.code {
+  border: solid 0.1mm;
+  box-sizing: border-box;
+  width: 30%;
+  height: 100%;
+}
+
+.payee {
+  border: solid 0.1mm;
+  box-sizing: border-box;
+  width: 60%;
+  height: 100%;
+}
+
+.payee-inner {
+  padding-left: 1mm;
+  float: left;
+  width: 90%;
+  height: 100%;
+}
+
+.sama {
+  text-align: right;
+  float: right;
+  padding-right: 1mm;
+  height: 100%;
+}
+
+.table {
+  width: 100%;
+  border: solid 0.1mm;
+  box-sizing: border-box;
+}
+
+.table > table,th,td {
+  border-collapse: collapse;
+  border: 1px solid;
+  box-sizing: border-box;
+  padding-left: 1mm;
+  padding-right: 1mm;
+}
+
+.th > th {
+  height: 7mm;
+  font-size:xx-small
+}
+
+/** 勘定科目 */
+.th > th:nth-of-type(1) {
+  width: 30%;
+}
+
+/** 摘要 */
+.th > th:nth-of-type(2) {
+  width: 50%;
+}
+
+/** 金額 */
+.th > th:nth-of-type(3) {
+  width: 20%;
+}
+
+.td > td {
+  height: 10mm;
+  font-size:smaller;
+}
+
+.td > td:nth-of-type(1) {
+  text-align: center;
+}
+.td > td:nth-of-type(2) {
+  text-align: left;
+}
+.td > td:nth-of-type(3) {
+  text-align: right;
+}
+
+.summary > td:nth-of-type(1) {
+  text-align: center;
+}
+
+.summary > td:nth-of-type(2) {
+  text-align: right;
+  font-size:smaller;
+}
+
