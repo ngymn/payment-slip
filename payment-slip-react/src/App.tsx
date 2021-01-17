@@ -38,9 +38,9 @@ export const App: React.FC = () => {
           <span>No.</span><input onChange={(e) => { setNo(e.target.value) }} />
         </div>
         <div>
-          <span>年</span><input onChange={(e) => { setDate({ ...date, y: e.target.value }) }} value={initDate.y} />
-          <span>月</span><input onChange={(e) => { setDate({ ...date, m: e.target.value }) }} value={initDate.m} />
-          <span>日</span><input onChange={(e) => { setDate({ ...date, d: e.target.value }) }} value={initDate.d} />
+          <span>年</span><input onChange={(e) => { setDate({ ...date, y: e.target.value }) }} value={date.y} />
+          <span>月</span><input onChange={(e) => { setDate({ ...date, m: e.target.value }) }} value={date.m} />
+          <span>日</span><input onChange={(e) => { setDate({ ...date, d: e.target.value }) }} value={date.d} />
         </div>
         <div>
           <span>コード</span><input onChange={(e) => { setCode(e.target.value) }} />
