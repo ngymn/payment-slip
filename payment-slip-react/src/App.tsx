@@ -26,6 +26,7 @@ export const App: React.FC = () => {
           <dt><span>入力エリア</span></dt>
           <dd><span>必要な情報をココに入力すると下部の出金伝票に値が反映されます。</span></dd>
           <dd><span>入力後はブラウザの印刷機能で出金伝票を保存してください。</span></dd>
+          <dd><span>※ただし、入力文字数が多くなると型崩れします。</span></dd>
         </dl>
 
         <div>
