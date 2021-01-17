@@ -5,7 +5,7 @@ import { PaymentSlip } from './PaymentSlip';
 
 export const App: React.FC = () => {
 
-  const initItem = { name: "", remark: "", amount: 0 }
+  const initItem = { name: "", remark: "", amount: "" }
 
   const [no, setNo] = useState("");
   const [date, setDate] = useState({ y: "", m: "", d: "" })
@@ -45,22 +45,22 @@ export const App: React.FC = () => {
         <div>
           <span>勘定科目</span><input onChange={(e) => { setItems(replaceItem({ ...items[0], name: e.target.value }, items, 0)) }} />
           <span>摘要</span><input onChange={(e) => { setItems(replaceItem({ ...items[0], remark: e.target.value }, items, 0)) }} />
-          <span>金額</span><input onChange={(e) => { setItems(replaceItem({ ...items[0], amount: Number(e.target.value) }, items, 0)) }} />
+          <span>金額</span><input onChange={(e) => { setItems(replaceItem({ ...items[0], amount: e.target.value }, items, 0)) }} />
         </div>
         <div>
           <span>勘定科目</span><input onChange={(e) => { setItems(replaceItem({ ...items[1], name: e.target.value }, items, 1)) }} />
           <span>摘要</span><input onChange={(e) => { setItems(replaceItem({ ...items[1], remark: e.target.value }, items, 1)) }} />
-          <span>金額</span><input onChange={(e) => { setItems(replaceItem({ ...items[1], amount: Number(e.target.value) }, items, 1)) }} />
+          <span>金額</span><input onChange={(e) => { setItems(replaceItem({ ...items[1], amount: e.target.value }, items, 1)) }} />
         </div>
         <div>
           <span>勘定科目</span><input onChange={(e) => { setItems(replaceItem({ ...items[2], name: e.target.value }, items, 2)) }} />
           <span>摘要</span><input onChange={(e) => { setItems(replaceItem({ ...items[2], remark: e.target.value }, items, 2)) }} />
-          <span>金額</span><input onChange={(e) => { setItems(replaceItem({ ...items[2], amount: Number(e.target.value) }, items, 2)) }} />
+          <span>金額</span><input onChange={(e) => { setItems(replaceItem({ ...items[2], amount: e.target.value }, items, 2)) }} />
         </div>
         <div>
           <span>勘定科目</span><input onChange={(e) => { setItems(replaceItem({ ...items[3], name: e.target.value }, items, 3)) }} />
           <span>摘要</span><input onChange={(e) => { setItems(replaceItem({ ...items[3], remark: e.target.value }, items, 3)) }} />
-          <span>金額</span><input onChange={(e) => { setItems(replaceItem({ ...items[3], amount: Number(e.target.value) }, items, 3)) }} />
+          <span>金額</span><input onChange={(e) => { setItems(replaceItem({ ...items[3], amount: e.target.value }, items, 3)) }} />
         </div>
       </div>
     </React.Fragment>

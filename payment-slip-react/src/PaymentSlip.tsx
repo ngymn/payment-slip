@@ -3,9 +3,9 @@ import React from "react";
 import './App.css';
 
 interface PaymentItemProps {
-    name: string
-    remark: string
-    amount: number
+    name?: string
+    remark?: string
+    amount?: string
 }
 
 export interface DateProps {
@@ -24,7 +24,7 @@ interface PaymentSlipProps {
 
 export const PaymentSlip: React.FC<PaymentSlipProps> = ({ no, date, code, payee, items }) => {
 
-    const totalAmount = items?.reduce((p, c) => p + c.amount, 0) || 0
+    const totalAmount = items?.reduce((p, c) => p + toInt(c.amount), 0).toString() || "999"
 
     return <React.Fragment>
         <div className="payment-slip">
@@ -71,7 +71,7 @@ export const PaymentSlip: React.FC<PaymentSlipProps> = ({ no, date, code, payee,
                             {items?.map((item, i) => <Item key={`item-${i}`} {...item} />)}
                             <tr className="summary">
                                 <td colSpan={2}><span>合計</span></td>
-                                <td><span>{doFormatCurrency(totalAmount)}</span></td>
+                                <td><span>{doFormatAmount(totalAmount)}</span></td>
                             </tr>
                         </tbody>
                     </table>
@@ -122,13 +122,28 @@ const Payee: React.FC<{ payee?: string }> = ({ payee }) =>
         </div>
     </React.Fragment>
 
-const Item: React.FC<PaymentItemProps> = ({ name, remark, amount }) =>
-    <React.Fragment>
-        <tr className="td">
-            <td><span>{name}</span></td>
-            <td><span>{remark}</span></td>
-            <td><span>{doFormatCurrency(amount)}</span></td>
-        </tr>
-    </React.Fragment>
 
-const doFormatCurrency = (amount: number) => `¥${amount.toLocaleString()}-`
+const Item: React.FC<PaymentItemProps> = React.memo(
+    ({ name, remark, amount }) =>
+        <React.Fragment>
+            <tr className="td">
+                <td><span>{name}</span></td>
+                <td><span>{remark}</span></td>
+                <td><span>{doFormatAmount(amount)}</span></td>
+            </tr>
+        </React.Fragment>
+)
+
+
+
+const toInt = (s?: string) => {
+    const n = Number(s)
+    return Number.isInteger(n) && n > 0 ? n : 0
+}
+
+const doFormatAmount = (s?: string) => {
+    const n = Number(s)
+    return Number.isInteger(n) && n > 0 ? doFormatCurrency(n) : s
+}
+
+const doFormatCurrency = (amount: number) => `¥${amount.toLocaleString()} -`
