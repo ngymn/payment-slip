@@ -1,42 +1,13 @@
 # payment-slip
 
-## Description
+## 説明
 
-This application provides the form of "payment slips (出金伝票)" as PDF simply.
+出金伝票をブラウザ上で簡単に作成、印刷できるツールです。
 
-## Demo
+## デモ
 
-<!-- TODO GitHub Pages -->
-Not yet
+<https://ngymn.github.io/payment-slip/>
 
-## Usage
+## お問い合わせ
 
-### Require
-
-- Docker
-
-### How to start
-
-```sh
-> git clone ${this repository}
-```
-
-```sh
-> cd payment-slip 
-> docker-compose build
-```
-
-<!-- init only  -->
-<!-- `docker-compose run --rm react sh -c 'npx create-react-app payment-slip-react --template typescript'` -->
-
-```sh
-## Start
-> docker-compose up
-```
-
-```sh
-## Stop
-> docker-compose down
-```
-
-open "http://localhost:3000"
+<https://github.com/ngymn/payment-slip/issues>
