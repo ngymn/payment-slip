@@ -24,7 +24,10 @@ interface PaymentSlipProps {
 
 export const PaymentSlip: React.FC<PaymentSlipProps> = ({ no, date, code, payee, items }) => {
 
-    const totalAmount = items?.reduce((p, c) => p + toInt(c.amount), 0).toString() || "999"
+    const totalAmount = () => {
+        const sum = items?.reduce((p, c) => p + toInt(c.amount), 0).toString() || 0
+        return sum > 0 ? sum.toString() : ""
+    }
 
     return <React.Fragment>
         <div className="payment-slip">
@@ -71,7 +74,7 @@ export const PaymentSlip: React.FC<PaymentSlipProps> = ({ no, date, code, payee,
                             {items?.map((item, i) => <Item key={`item-${i}`} {...item} />)}
                             <tr className="summary">
                                 <td colSpan={2}><span>合計</span></td>
-                                <td><span>{doFormatAmount(totalAmount)}</span></td>
+                                <td><span>{doFormatAmount(totalAmount())}</span></td>
                             </tr>
                         </tbody>
                     </table>
