@@ -7,13 +7,11 @@ interface PaymentItemProps {
     remark?: string
     amount?: string
 }
-
-export interface DateProps {
+interface DateProps {
     y?: string
     m?: string
     d?: string
 }
-
 interface PaymentSlipProps {
     no?: string
     date?: DateProps
@@ -85,10 +83,11 @@ export const PaymentSlip: React.FC<PaymentSlipProps> = ({ no, date, code, payee,
     </React.Fragment>
 };
 
+// ----- Component ----- //
+
 interface ApprovingBoxProps {
     title?: string
 }
-
 const ApprovingBox: React.FC<ApprovingBoxProps> = ({ title }) =>
     <React.Fragment>
         <div className="approving-box-outer">
@@ -125,7 +124,6 @@ const Payee: React.FC<{ payee?: string }> = ({ payee }) =>
         </div>
     </React.Fragment>
 
-
 const Item: React.FC<PaymentItemProps> = React.memo(
     ({ name, remark, amount }) =>
         <React.Fragment>
@@ -137,7 +135,7 @@ const Item: React.FC<PaymentItemProps> = React.memo(
         </React.Fragment>
 )
 
-
+// ----- Utils ----- //
 
 const toInt = (s?: string) => {
     const n = Number(s)
