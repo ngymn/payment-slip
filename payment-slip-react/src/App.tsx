@@ -5,10 +5,15 @@ import { PaymentSlip } from './PaymentSlip';
 
 export const App: React.FC = () => {
 
-  const initItem = { name: "", remark: "", amount: "" }
+  const now = new Date()
 
+  const initDate = { y: now.getFullYear().toString(), m: (now.getMonth() + 1).toString(), d: now.getDate().toString() }
+  const initApprover = ["係印", "", "", "承認印"]
+  const initItem = { name: "", remark: "", amount: "" }
+  
   const [no, setNo] = useState("");
-  const [date, setDate] = useState({ y: "", m: "", d: "" })
+  const [date, setDate] = useState(initDate);
+  const [approver, setApprover] = useState(initApprover);
   const [code, setCode] = useState("");
   const [payee, setPayee] = useState("");
   const [items, setItems] = useState([initItem, initItem, initItem, initItem])
@@ -21,7 +26,7 @@ export const App: React.FC = () => {
   const inputArea =
     <React.Fragment>
       <div id="input-area">
-        
+
         <dl>
           <dt><span>入力エリア</span></dt>
           <dd><span>必要な情報をココに入力すると下部の出金伝票に値が反映されます。</span></dd>
@@ -33,15 +38,22 @@ export const App: React.FC = () => {
           <span>No.</span><input onChange={(e) => { setNo(e.target.value) }} />
         </div>
         <div>
-          <span>年</span><input onChange={(e) => { setDate({ ...date, y: e.target.value }) }} />
-          <span>月</span><input onChange={(e) => { setDate({ ...date, m: e.target.value }) }} />
-          <span>日</span><input onChange={(e) => { setDate({ ...date, d: e.target.value }) }} />
+          <span>年</span><input onChange={(e) => { setDate({ ...date, y: e.target.value }) }} value={initDate.y} />
+          <span>月</span><input onChange={(e) => { setDate({ ...date, m: e.target.value }) }} value={initDate.m} />
+          <span>日</span><input onChange={(e) => { setDate({ ...date, d: e.target.value }) }} value={initDate.d} />
         </div>
         <div>
           <span>コード</span><input onChange={(e) => { setCode(e.target.value) }} />
         </div>
         <div>
           <span>支払先</span><input onChange={(e) => { setPayee(e.target.value) }} />
+        </div>
+        <div>
+          <span>承認欄</span>
+          <input onChange={(e) => { setApprover(replaceItem(e.target.value, approver, 3)) }} value={approver[3]} />
+          <input onChange={(e) => { setApprover(replaceItem(e.target.value, approver, 2)) }} value={approver[2]} />
+          <input onChange={(e) => { setApprover(replaceItem(e.target.value, approver, 1)) }} value={approver[1]} />
+          <input onChange={(e) => { setApprover(replaceItem(e.target.value, approver, 0)) }} value={approver[0]} />
         </div>
         <div>
           <span>勘定科目</span><input onChange={(e) => { setItems(replaceItem({ ...items[0], name: e.target.value }, items, 0)) }} />
@@ -69,7 +81,7 @@ export const App: React.FC = () => {
   return (
     <React.Fragment>
       {inputArea}
-      <PaymentSlip no={no} date={date} code={code} payee={payee} items={items} />
+      <PaymentSlip no={no} date={date} approver={approver} code={code} payee={payee} items={items} />
     </React.Fragment>
   );
 }

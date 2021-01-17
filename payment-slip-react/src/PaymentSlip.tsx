@@ -15,12 +15,13 @@ interface DateProps {
 interface PaymentSlipProps {
     no?: string
     date?: DateProps
+    approver?: string[]
     code?: string
     payee?: string
     items?: PaymentItemProps[]
 }
 
-export const PaymentSlip: React.FC<PaymentSlipProps> = ({ no, date, code, payee, items }) => {
+export const PaymentSlip: React.FC<PaymentSlipProps> = ({ no, date, approver, code, payee, items }) => {
 
     const totalAmount = () => {
         const sum = items?.reduce((p, c) => p + toInt(c.amount), 0).toString() || 0
@@ -44,10 +45,10 @@ export const PaymentSlip: React.FC<PaymentSlipProps> = ({ no, date, code, payee,
                     </div>
                     <div className="head-right">
                         <div className="approving-boxes">
-                            <ApprovingBox title="係印" />
-                            <ApprovingBox />
-                            <ApprovingBox />
-                            <ApprovingBox title="承認印" />
+                            <ApprovingBox title={approver? approver[0] : undefined} />
+                            <ApprovingBox title={approver? approver[1] : undefined} />
+                            <ApprovingBox title={approver? approver[2] : undefined} />
+                            <ApprovingBox title={approver? approver[3] : undefined} />
                         </div>
                     </div>
                 </div>
